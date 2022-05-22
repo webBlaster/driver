@@ -1,4 +1,5 @@
 import Home from "./pages/Home";
+import OrderInformation from "./pages/Info";
 import { Grommet } from "grommet";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -8,6 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/order.info" element={<OrderInformation />} />
         </Routes>
       </Router>
     </Grommet>

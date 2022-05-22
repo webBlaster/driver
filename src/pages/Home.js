@@ -1,6 +1,6 @@
 import { Box, Heading } from "grommet";
 import styled from "styled-components";
-import Order from "../components/Order";
+import OrderList from "../components/OrderList";
 
 const Container = styled(Box)`
   background: #333333;
@@ -16,9 +16,7 @@ const Home = () => {
           Order Feeds
         </Heading>
         <Box>
-          <Order />
-          <Order />
-          <Order />
+          <OrderList />
         </Box>
       </Container>
     </>
