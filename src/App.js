@@ -9,7 +9,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/order.info" element={<OrderInformation />} />
+          <Route path="/order.info/:id" element={<OrderInformation />} />
         </Routes>
       </Router>
     </Grommet>

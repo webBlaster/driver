@@ -6,7 +6,7 @@ const Container = styled(Card)`
   margin: 15px 0;
 `;
 
-const OrderList = () => {
+const OrderList = ({ orders }) => {
   let data = [
     {
       name: "Anthony Joshua",
@@ -34,19 +34,21 @@ const OrderList = () => {
     },
   ];
 
-  let orders = data.map((item) => {
+  let items = orders.map((item) => {
     return (
-      <Container width="medium" margin="2" background="light-2">
+      <Container id={item.id} width="medium" margin="2" background="light-2">
         <CardBody pad="medium">
-          <Paragraph margin="small">Name:{item.name}</Paragraph>
-          <Paragraph margin="small">Mobile No: {item.phoneNumber}</Paragraph>
+          <Paragraph margin="small">Name:{item.sender_name}</Paragraph>
           <Paragraph margin="small">
-            Pickup Address: {item.pickupAddress}
+            Mobile No: {item.sender_phonenumber}
           </Paragraph>
-          <Paragraph margin="small">Package size: {item.packageSize}</Paragraph>
+          <Paragraph margin="small">
+            Pickup Address: {item.pickup_address}
+          </Paragraph>
+          <Paragraph margin="small">Package size: {item.size}</Paragraph>
         </CardBody>
         <CardFooter pad="small" background="light-4">
-          <Link to="/order.info">
+          <Link to={`/order.info/${item.id}`}>
             <Button primary color="#333333" label="View" alignSelf="center" />
           </Link>
         </CardFooter>
@@ -54,7 +56,7 @@ const OrderList = () => {
     );
   });
 
-  return <>{orders}</>;
+  return <>{items}</>;
 };
 
 export default OrderList;

@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { Box, Heading } from "grommet";
 import styled from "styled-components";
 import OrderList from "../components/OrderList";
+
+import { getOrders } from "../services/order";
 
 const Container = styled(Box)`
   background: #333333;
@@ -9,6 +12,15 @@ const Container = styled(Box)`
 `;
 
 const Home = () => {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const results = await getOrders();
+      if (results) {
+        setOrders(results.data);
+      }
+    })();
+  }, []);
   return (
     <>
       <Container align="center" pad="medium">
@@ -16,7 +28,7 @@ const Home = () => {
           Order Feeds
         </Heading>
         <Box>
-          <OrderList />
+          <OrderList orders={orders} />
         </Box>
       </Container>
     </>
