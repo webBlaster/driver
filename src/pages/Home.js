@@ -13,14 +13,18 @@ const Container = styled(Box)`
 
 const Home = () => {
   const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const results = await getOrders();
-      if (results) {
-        setOrders(results.data);
-      }
-    })();
-  }, []);
+  useEffect(
+    () => {
+      (async () => {
+        const results = await getOrders();
+        if (results) {
+          setOrders(results.data);
+        }
+      })();
+    },
+    // eslint-disable-next-line
+    []
+  );
   return (
     <>
       <Container align="center" pad="medium">

@@ -7,36 +7,9 @@ const Container = styled(Card)`
 `;
 
 const OrderList = ({ orders }) => {
-  let data = [
-    {
-      name: "Anthony Joshua",
-      phoneNumber: "0814489765",
-      pickupAddress: "3, Oyaniru street ketu alapere lagos",
-      packageSize: "small",
-    },
-    {
-      name: "Anthony Joshua",
-      phoneNumber: "0814489765",
-      pickupAddress: "3, Oyaniru street ketu alapere lagos",
-      packageSize: "small",
-    },
-    {
-      name: "Anthony Joshua",
-      phoneNumber: "0814489765",
-      pickupAddress: "3, Oyaniru street ketu alapere lagos",
-      packageSize: "small",
-    },
-    {
-      name: "Anthony Joshua",
-      phoneNumber: "0814489765",
-      pickupAddress: "3, Oyaniru street ketu alapere lagos",
-      packageSize: "large",
-    },
-  ];
-
   let items = orders.map((item) => {
     return (
-      <Container id={item.id} width="medium" margin="2" background="light-2">
+      <Container key={item.id} width="medium" margin="2" background="light-2">
         <CardBody pad="medium">
           <Paragraph margin="small">Name:{item.sender_name}</Paragraph>
           <Paragraph margin="small">
