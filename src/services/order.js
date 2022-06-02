@@ -26,3 +26,19 @@ export const getOrder = async (id) => {
     return result;
   }
 };
+
+export const acceptOrder = async (id) => {
+  const response = await fetch(`${API_URL}/decide-order`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, accept: true }),
+  }).catch((error) => {
+    alert("failed to accept order");
+    return;
+  });
+
+  if (response) {
+    const result = await response;
+    return result;
+  }
+};
