@@ -18,6 +18,6 @@ export const getUserLocation = async () => {
 
   //return this
   const { latitude, longitude } = currentPosition.coords;
-  console.log(latitude, longitude);
+  alert(`${latitude}, ${longitude}`);
   return { lat: latitude, lon: longitude };
 };
