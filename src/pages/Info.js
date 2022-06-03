@@ -17,14 +17,15 @@ const DarkBackground = styled(Box)`
 const OrderInformation = () => {
   let { id } = useParams();
   let [order, setOrder] = useState({});
+  const fetchOrder = async () => {
+    const result = await getOrder(id);
+    if (result) {
+      setOrder(result.data);
+    }
+  };
   useEffect(
     () => {
-      (async () => {
-        const result = await getOrder(id);
-        if (result) {
-          setOrder(result.data);
-        }
-      })();
+      fetchOrder();
     },
     // eslint-disable-next-line
     []
