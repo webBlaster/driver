@@ -1,3 +1,5 @@
+import { API_URL } from "../constants";
+
 export const getUserLocation = async () => {
   if (!navigator.geolocation) {
     alert("no geolocation support");

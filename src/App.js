@@ -19,16 +19,20 @@ function App() {
       setValidIp(true);
     }
   };
-  useEffect(() => {
-    //check if ip address is valid
-    validateIp();
-    setInterval(() => {
-      let coordinates = getUserLocation();
-      setGeocode(coordinates);
-      //emit geocode
-      emitLocation(geocode);
-    }, 20000);
-  }, []);
+  useEffect(
+    () => {
+      //check if ip address is valid
+      validateIp();
+      setInterval(() => {
+        let coordinates = getUserLocation();
+        setGeocode(coordinates);
+        //emit geocode
+        emitLocation(geocode);
+      }, 20000);
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <Grommet plain>
