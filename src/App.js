@@ -4,10 +4,11 @@ import { Grommet } from "grommet";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_URL } from "./constants";
-import { getUserLocation } from "./services/geolocate";
+import { emitLocation, getUserLocation } from "./services/geolocate";
 
 function App() {
   const [validIp, setValidIp] = useState(false);
+  const [geocode, setGeocode] = useState({});
 
   const validateIp = async () => {
     const response = await fetch(`${API_URL}/validate-ip`).catch((error) =>
@@ -21,7 +22,14 @@ function App() {
   useEffect(() => {
     //check if ip address is valid
     validateIp();
-    setInterval(getUserLocation, 20000);
+    setInterval(() => {
+      let geocode = getUserLocation();
+      setGeocode(geocode);
+      //emit geocode
+      if (geocode) {
+        emitLocation(geocode);
+      }
+    }, 20000);
   }, []);
 
   return (
