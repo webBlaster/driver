@@ -8,7 +8,7 @@ import { emitLocation, getUserLocation } from "./services/geolocate";
 
 function App() {
   const [validIp, setValidIp] = useState(false);
-  const [geocode, setGeocode] = useState({});
+  let [geocode, setGeocode] = useState({ lat: undefined, long: undefined });
 
   const validateIp = async () => {
     const response = await fetch(`${API_URL}/validate-ip`).catch((error) =>
@@ -23,12 +23,10 @@ function App() {
     //check if ip address is valid
     validateIp();
     setInterval(() => {
-      let geocode = getUserLocation();
-      setGeocode(geocode);
+      let coordinates = getUserLocation();
+      setGeocode(coordinates);
       //emit geocode
-      if (geocode) {
-        emitLocation(geocode);
-      }
+      emitLocation(geocode);
     }, 20000);
   }, []);
 
