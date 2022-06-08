@@ -15,12 +15,11 @@ export const getUserLocation = async () => {
     alert(error.message);
   });
   if (!currentPosition) {
-    return {};
+    return null;
   }
 
   //return this
   const { latitude, longitude } = currentPosition.coords;
-  console.log(`${latitude}, ${longitude}`);
   return { lat: latitude, lon: longitude };
 };
 
@@ -30,7 +29,7 @@ export const emitLocation = async (geocode) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(geocode),
   }).catch((error) => {
-    alert("failed to emit location");
+    console.log("failed to emit location");
     return;
   });
 
