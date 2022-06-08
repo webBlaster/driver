@@ -8,7 +8,7 @@ import { emitLocation, getUserLocation } from "./services/geolocate";
 import Admin from "./pages/Admin";
 
 function App() {
-  const [validIp, setValidIp] = useState(!false);
+  const [validIp, setValidIp] = useState(false);
   //let [geocode, setGeocode] = useState({ lat: undefined, long: undefined });
 
   const validateIp = async () => {
