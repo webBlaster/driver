@@ -42,3 +42,19 @@ export const acceptOrder = async (id) => {
     return result;
   }
 };
+
+export const completeOrder = async (id) => {
+  const response = await fetch(`${API_URL}/complete-order`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id }),
+  }).catch((error) => {
+    alert("failed to complete order");
+    return;
+  });
+
+  if (response) {
+    const result = await response;
+    return result;
+  }
+};

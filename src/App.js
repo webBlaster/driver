@@ -1,5 +1,6 @@
 import Home from "./pages/Home";
 import OrderInformation from "./pages/Info";
+import InProgress from "./pages/InProgress";
 import { Grommet } from "grommet";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -52,6 +53,16 @@ function App() {
             element={
               validIp ? (
                 <OrderInformation />
+              ) : (
+                <p>you are not allowed to view this website</p>
+              )
+            }
+          />
+          <Route
+            path="/in_progress/:id"
+            element={
+              validIp ? (
+                <InProgress />
               ) : (
                 <p>you are not allowed to view this website</p>
               )

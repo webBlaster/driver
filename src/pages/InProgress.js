@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Box, Button, Card, CardBody, Paragraph } from "grommet";
 import { useEffect, useState } from "react";
-import { getOrder, acceptOrder } from "../services/order";
+import { getOrder, completeOrder } from "../services/order";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Container = styled(Card)`
@@ -14,11 +14,11 @@ const DarkBackground = styled(Box)`
   height: 100vh;
 `;
 
-const OrderInformation = () => {
+const InProgress = () => {
   let { id } = useParams();
   let navigate = useNavigate();
-
   let [order, setOrder] = useState({});
+
   const fetchOrder = async () => {
     const result = await getOrder(id);
     if (result) {
@@ -26,11 +26,10 @@ const OrderInformation = () => {
     }
   };
 
-  const accept = async () => {
-    let result = await acceptOrder(order?.id);
-    if (result) {
-      console.log(result);
-      navigate(`/in_progress/${order?.id}`);
+  const finishOrder = async () => {
+    const result = await completeOrder(id);
+    if (result.status === 200) {
+      navigate(`/`);
     }
   };
 
@@ -41,37 +40,37 @@ const OrderInformation = () => {
     // eslint-disable-next-line
     []
   );
-  return order?.status !== "pending" ? null : (
+  return order?.status !== "in_progress" ? null : (
     <DarkBackground>
       <Container width="large" margin="2" align="center" background="light-2">
         <CardBody pad="medium" alignContent="center">
-          <Paragraph margin="small">Sender Name:{order?.sender_name}</Paragraph>
           <Paragraph margin="small">
-            Sender Mobile No: {order?.sender_phonenumber}
+            <b>{order?.sender_name}'s Order is in progress</b>
           </Paragraph>
           <Paragraph margin="small">
-            Pickup Address: {order?.pickup_address}
+            <b>Sender Mobile No:</b> {order?.sender_phonenumber}
+          </Paragraph>
+
+          <Paragraph margin="small">
+            <b>Receiver Name:</b>
+            {order?.receiver_name}
           </Paragraph>
           <Paragraph margin="small">
-            Receiver Name:{order?.receiver_name}
-          </Paragraph>
-          <Paragraph margin="small">
-            Receiver Mobile No: {order?.receiver_phonenumber}
+            <b>Receiver Mobile No:</b> {order?.receiver_phonenumber}
           </Paragraph>
           <hr />
           <Paragraph margin="small">
-            Dropoff Address: {order?.dropoff_address}
+            <b>Dropoff Address:</b> {order?.dropoff_address}
           </Paragraph>
-          <Paragraph margin="small">Package size: {order?.size}</Paragraph>
           <Paragraph margin="small">
-            Description: {order?.description}
+            <b>Description:</b> {order?.description}
           </Paragraph>
 
           <Button
-            onClick={accept}
+            onClick={finishOrder}
             primary
             color="#00873D"
-            label="Accept"
+            label="Mark as Complete"
             alignSelf="center"
           />
         </CardBody>
@@ -80,4 +79,4 @@ const OrderInformation = () => {
   );
 };
 
-export default OrderInformation;
+export default InProgress;
