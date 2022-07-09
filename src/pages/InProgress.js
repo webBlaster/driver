@@ -60,6 +60,9 @@ const InProgress = () => {
           </Paragraph>
           <hr />
           <Paragraph margin="small">
+            <b>Pickup Address:</b> {order?.pickup_address}
+          </Paragraph>
+          <Paragraph margin="small">
             <b>Dropoff Address:</b> {order?.dropoff_address}
           </Paragraph>
           <Paragraph margin="small">
